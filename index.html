@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ștefan Mândrescu — Lokmera Ltd.</title>
+    
+    <!-- Google Fonts for American Psycho elegance & modern readability -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #f7f5f0;           /* Bone / Off-White */
+            --card-bg: #ffffff;            /* Pure Crisp Card */
+            --text-primary: #111827;       /* Deep Charcoal */
+            --text-secondary: #4b5563;     /* Muted Grey */
+            --brand-accent: #004B87;       /* Lokmera Navy Blue */
+            --border-color: #e5e0d8;       /* Subtle Embossed Border */
+            --shadow-subtle: 0 20px 40px -15px rgba(0, 0, 0, 0.07);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            /* Subtle tactile grain */
+            background-image: radial-gradient(#e2ded4 0.75px, transparent 0.75px);
+            background-size: 16px 16px;
+        }
+
+        .card-container {
+            width: 100%;
+            max-width: 420px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 40px 32px;
+            box-shadow: var(--shadow-subtle);
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Company Header */
+        .company-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 32px;
+        }
+
+        .company-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: var(--brand-accent);
+            text-transform: uppercase;
+        }
+
+        .company-tag {
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        /* Personal Info Block */
+        .person-info {
+            margin-bottom: 32px;
+        }
+
+        .name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.1rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            color: var(--text-primary);
+            line-height: 1.15;
+            margin-bottom: 6px;
+        }
+
+        .title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--brand-accent);
+            font-weight: 600;
+        }
+
+        /* Action Buttons */
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .btn-primary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: var(--brand-accent);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 14px 20px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+        }
+
+        .btn-primary:active {
+            transform: scale(0.99);
+        }
+
+        .btn-secondary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: border-color 0.2s ease, background-color 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            background-color: #faf9f6;
+            border-color: #c8c2b7;
+        }
+
+        /* Details Table / List */
+        .details-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 24px;
+            font-size: 0.85rem;
+        }
+
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .detail-label {
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .detail-value {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 400;
+            line-height: 1.4;
+        }
+
+        a.detail-value:hover {
+            color: var(--brand-accent);
+        }
+
+        /* Footer / Watermark */
+        .card-footer {
+            margin-top: 32px;
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            color: #a39d93;
+            text-transform: uppercase;
+        }
+
+        /* Micro SVG Icons */
+        .icon {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-container">
+        <!-- Header -->
+        <div class="company-header">
+            <div class="company-name">Lokmera</div>
+            <div class="company-tag">Moldova</div>
+        </div>
+
+        <!-- Main Identity -->
+        <div class="person-info">
+            <h1 class="name">Ștefan Mândrescu</h1>
+            <div class="title">Sales & Support Engineer</div>
+        </div>
+
+        <!-- Main Call to Actions -->
+        <div class="actions">
+            <!-- Automatically creates contact on mobile devices -->
+            <button class="btn-primary" onclick="downloadVCard()">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                Adaugă în Contacte
+            </button>
+            <a href="tel:+37369005858" class="btn-secondary">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                Apelează Mobil
+            </a>
+        </div>
+
+        <!-- Detailed Contact Info -->
+        <div class="details-list">
+            <div class="detail-item">
+                <span class="detail-label">Telefon Birou</span>
+                <a href="tel:+37322288822" class="detail-value">(+373 22) 28 88 22</a>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">Web</span>
+                <a href="https://lokmera.md" target="_blank" rel="noopener" class="detail-value">www.lokmera.md</a>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">Adresă Sediu</span>
+                <a href="https://maps.google.com/?q=str.+Mitropolit+Gurie+Grosu+9,+Chisinau,+Moldova" target="_blank" rel="noopener" class="detail-value">
+                    MD-2028, mun. Chișinău<br>
+                    str. Mitropolit Gurie Grosu 9, Moldova
+                </a>
+            </div>
+        </div>
+
+        <div class="card-footer">
+            Bone &bull; Silian Rail Style
+        </div>
+    </div>
+
+    <script>
+        function downloadVCard() {
+            const vcardData = `BEGIN:VCARD
+VERSION:3.0
+FN:Ștefan Mândrescu
+N:Mândrescu;Ștefan;;;
+ORG:Lokmera Ltd.
+TITLE:Sales & Support Engineer
+TEL;TYPE=CELL:+37369005858
+TEL;TYPE=WORK:(+37322)288822
+ADR;TYPE=WORK:;;str. Mitropolit Gurie Grosu 9;Chișinău;;MD-2028;Moldova
+URL:https://lokmera.md
+END:VCARD`;
+
+            const blob = new Blob([vcardData], { type: 'text/vcard;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'Stefan_Mandrescu_Lokmera.vcf');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
