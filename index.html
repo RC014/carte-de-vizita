@@ -5,19 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ștefan Mândrescu — Lokmera Ltd.</title>
     
-    <!-- Google Fonts for American Psycho elegance & modern readability -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-color: #f7f5f0;           /* Bone / Off-White */
-            --card-bg: #ffffff;            /* Pure Crisp Card */
-            --text-primary: #111827;       /* Deep Charcoal */
-            --text-secondary: #4b5563;     /* Muted Grey */
-            --brand-accent: #004B87;       /* Lokmera Navy Blue */
-            --border-color: #e5e0d8;       /* Subtle Embossed Border */
+            --bg-color: #f7f5f0;
+            --card-bg: #ffffff;
+            --text-primary: #111827;
+            --text-secondary: #4b5563;
+            --brand-accent: #004B87;
+            --border-color: #e5e0d8;
             --shadow-subtle: 0 20px 40px -15px rgba(0, 0, 0, 0.07);
         }
 
@@ -37,7 +36,6 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
-            /* Subtle tactile grain */
             background-image: radial-gradient(#e2ded4 0.75px, transparent 0.75px);
             background-size: 16px 16px;
         }
@@ -51,10 +49,8 @@
             padding: 40px 32px;
             box-shadow: var(--shadow-subtle);
             position: relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        /* Company Header */
         .company-header {
             display: flex;
             justify-content: space-between;
@@ -81,7 +77,6 @@
             font-weight: 600;
         }
 
-        /* Personal Info Block */
         .person-info {
             margin-bottom: 32px;
         }
@@ -104,7 +99,6 @@
             font-weight: 600;
         }
 
-        /* Action Buttons */
         .actions {
             display: flex;
             flex-direction: column;
@@ -156,7 +150,6 @@
             border-color: #c8c2b7;
         }
 
-        /* Details Table / List */
         .details-list {
             display: flex;
             flex-direction: column;
@@ -191,7 +184,6 @@
             color: var(--brand-accent);
         }
 
-        /* Footer / Watermark */
         .card-footer {
             margin-top: 32px;
             text-align: center;
@@ -202,7 +194,6 @@
             text-transform: uppercase;
         }
 
-        /* Micro SVG Icons */
         .icon {
             width: 16px;
             height: 16px;
@@ -213,32 +204,28 @@
 <body>
 
     <div class="card-container">
-        <!-- Header -->
         <div class="company-header">
             <div class="company-name">Lokmera</div>
             <div class="company-tag">Moldova</div>
         </div>
 
-        <!-- Main Identity -->
         <div class="person-info">
             <h1 class="name">Ștefan Mândrescu</h1>
             <div class="title">Sales & Support Engineer</div>
         </div>
 
-        <!-- Main Call to Actions -->
         <div class="actions">
-            <!-- Automatically creates contact on mobile devices -->
-            <button class="btn-primary" onclick="downloadVCard()">
+            <!-- Buton cu legătură directă către schema vCard -->
+            <a id="saveContactBtn" class="btn-primary" href="#">
                 <svg class="icon" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
                 Adaugă în Contacte
-            </button>
+            </a>
             <a href="tel:+37369005858" class="btn-secondary">
                 <svg class="icon" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
                 Apelează Mobil
             </a>
         </div>
 
-        <!-- Detailed Contact Info -->
         <div class="details-list">
             <div class="detail-item">
                 <span class="detail-label">Telefon Birou</span>
@@ -265,28 +252,24 @@
     </div>
 
     <script>
-        function downloadVCard() {
-            const vcardData = `BEGIN:VCARD
-VERSION:3.0
-FN:Ștefan Mândrescu
-N:Mândrescu;Ștefan;;;
-ORG:Lokmera Ltd.
-TITLE:Sales & Support Engineer
-TEL;TYPE=CELL:+37369005858
-TEL;TYPE=WORK:(+37322)288822
-ADR;TYPE=WORK:;;str. Mitropolit Gurie Grosu 9;Chișinău;;MD-2028;Moldova
-URL:https://lokmera.md
-END:VCARD`;
+        // Pregătirea datelor vCard cu suport nativ UTF-8 pentru diacritice
+        const vcardData = [
+            'BEGIN:VCARD',
+            'VERSION:3.0',
+            'FN;CHARSET=UTF-8:Ștefan Mândrescu',
+            'N;CHARSET=UTF-8:Mândrescu;Ștefan;;;',
+            'ORG;CHARSET=UTF-8:Lokmera Ltd.',
+            'TITLE;CHARSET=UTF-8:Sales & Support Engineer',
+            'TEL;TYPE=CELL:+37369005858',
+            'TEL;TYPE=WORK:(+37322)288822',
+            'ADR;TYPE=WORK;CHARSET=UTF-8:;;str. Mitropolit Gurie Grosu 9;Chișinău;;MD-2028;Moldova',
+            'URL:https://lokmera.md',
+            'END:VCARD'
+        ].join('\n');
 
-            const blob = new Blob([vcardData], { type: 'text/vcard;charset=utf-8;' });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.setAttribute('download', 'Stefan_Mandrescu_Lokmera.vcf');
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
+        // Codificăm în Data-URI pentru deschidere nativă fără atribute de "download"
+        const dataUri = 'data:text/vcard;charset=utf-8,' + encodeURIComponent(vcardData);
+        document.getElementById('saveContactBtn').setAttribute('href', dataUri);
     </script>
 </body>
 </html>
