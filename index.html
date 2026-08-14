@@ -251,16 +251,10 @@
     </div>
 
 <script>
-    function handleContactAdd(event) {
-        // Prevenim comportamentul standard de navigare/descărcare
+    async function handleContactAdd(event) {
         if (event) event.preventDefault();
 
-        const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-        const isAndroid = /Android/i.test(navigator.userAgent);
-
-        if (isIOS) {
-            // iOS: Deschide direct ecranul Apple Contacts
-            const vcardData = `BEGIN:VCARD
+        const vcardData = `BEGIN:VCARD
 VERSION:3.0
 N;CHARSET=UTF-8:Mândrescu;Ștefan;;;
 FN;CHARSET=UTF-8:Ștefan Mândrescu
@@ -272,35 +266,39 @@ ADR;TYPE=WORK;CHARSET=UTF-8:;;str. Mitropolit Gurie Grosu 9;Chișinău;;MD-2028;
 URL:https://lokmera.md
 END:VCARD`;
 
+        const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+        // 1. PE IPHONE (iOS): Deschide direct ecranul nativ Apple Contacts
+        if (isIOS) {
             window.location.href = 'data:text/vcard;charset=utf-8,' + encodeURIComponent(vcardData);
-
-        } else if (isAndroid) {
-            // ANDROID: Intent nativ care deschide DIRECT meniul "Adaugă Contact"
-            // Fără descărcare de fișier!
-            const name = "Ștefan Mândrescu";
-            const phone = "+37369005858";
-            const workPhone = "+37322288822";
-            const company = "Lokmera Ltd.";
-            const jobTitle = "Sales & Support Engineer";
-            const address = "str. Mitropolit Gurie Grosu 9, Chișinău";
-
-            const androidIntent = `intent:#Intent;` +
-                `action=android.intent.action.INSERT;` +
-                `type=vnd.android.cursor.dir/contact;` +
-                `S.name=${encodeURIComponent(name)};` +
-                `S.phone=${encodeURIComponent(phone)};` +
-                `S.secondary_phone=${encodeURIComponent(workPhone)};` +
-                `S.company=${encodeURIComponent(company)};` +
-                `S.job_title=${encodeURIComponent(jobTitle)};` +
-                `S.postal=${encodeURIComponent(address)};` +
-                `end`;
-
-            window.location.href = androidIntent;
-
-        } else {
-            // Fallback doar pentru laptop/desktop: descarcă fișierul vcf
-            window.location.href = 'stefan.vcf';
+            return;
         }
+
+        // 2. PE ANDROID (Browsere Moderne): Deschide fia de partajare nativă cu opțiunea "Salvează în Contacte"
+        const file = new File([vcardData], 'Stefan_Mandrescu_Lokmera.vcf', { type: 'text/vcard' });
+
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            try {
+                await navigator.share({
+                    files: [file],
+                    title: 'Ștefan Mândrescu',
+                    text: 'Contact Ștefan Mândrescu - Lokmera Ltd.'
+                });
+                return;
+            } catch (err) {
+                // Dacă utilizatorul închide fereastra de share, nu facem nimic
+                if (err.name === 'AbortError') return;
+            }
+        }
+
+        // 3. FALLBACK PENTRU DESKTOP / BROWSERE VECHI: Descarcă fișierul .vcf
+        const blob = new Blob([vcardData], { type: 'text/vcard;charset=utf-8' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.setAttribute('download', 'Stefan_Mandrescu_Lokmera.vcf');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     }
 </script>
 </body>
