@@ -216,7 +216,7 @@
 
         <div class="actions">
             <!-- Buton cu legătură directă către schema vCard -->
-            <a href="stefan.vcf" class="btn-primary">
+            <a href="#" class="btn-primary" onclick="handleContactAdd(event)">
                 Adaugă în Contacte
             </a>
             <a href="tel:+37369005858" class="btn-secondary">
@@ -250,25 +250,58 @@
         </div>
     </div>
 
-    <script>
-        // Pregătirea datelor vCard cu suport nativ UTF-8 pentru diacritice
-        const vcardData = [
-            'BEGIN:VCARD',
-            'VERSION:3.0',
-            'FN;CHARSET=UTF-8:Ștefan Mândrescu',
-            'N;CHARSET=UTF-8:Mândrescu;Ștefan;;;',
-            'ORG;CHARSET=UTF-8:Lokmera Ltd.',
-            'TITLE;CHARSET=UTF-8:Sales & Support Engineer',
-            'TEL;TYPE=CELL:+37369005858',
-            'TEL;TYPE=WORK:(+37322)288822',
-            'ADR;TYPE=WORK;CHARSET=UTF-8:;;str. Mitropolit Gurie Grosu 9;Chișinău;;MD-2028;Moldova',
-            'URL:https://lokmera.md',
-            'END:VCARD'
-        ].join('\n');
+<script>
+    function handleContactAdd(event) {
+        // Prevenim comportamentul standard de navigare/descărcare
+        if (event) event.preventDefault();
 
-        // Codificăm în Data-URI pentru deschidere nativă fără atribute de "download"
-        const dataUri = 'data:text/vcard;charset=utf-8,' + encodeURIComponent(vcardData);
-        document.getElementById('saveContactBtn').setAttribute('href', dataUri);
-    </script>
+        const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+        const isAndroid = /Android/i.test(navigator.userAgent);
+
+        if (isIOS) {
+            // iOS: Deschide direct ecranul Apple Contacts
+            const vcardData = `BEGIN:VCARD
+VERSION:3.0
+N;CHARSET=UTF-8:Mândrescu;Ștefan;;;
+FN;CHARSET=UTF-8:Ștefan Mândrescu
+ORG;CHARSET=UTF-8:Lokmera Ltd.
+TITLE;CHARSET=UTF-8:Sales & Support Engineer
+TEL;TYPE=CELL,VOICE:+37369005858
+TEL;TYPE=WORK,VOICE:+37322288822
+ADR;TYPE=WORK;CHARSET=UTF-8:;;str. Mitropolit Gurie Grosu 9;Chișinău;;MD-2028;Moldova
+URL:https://lokmera.md
+END:VCARD`;
+
+            window.location.href = 'data:text/vcard;charset=utf-8,' + encodeURIComponent(vcardData);
+
+        } else if (isAndroid) {
+            // ANDROID: Intent nativ care deschide DIRECT meniul "Adaugă Contact"
+            // Fără descărcare de fișier!
+            const name = "Ștefan Mândrescu";
+            const phone = "+37369005858";
+            const workPhone = "+37322288822";
+            const company = "Lokmera Ltd.";
+            const jobTitle = "Sales & Support Engineer";
+            const address = "str. Mitropolit Gurie Grosu 9, Chișinău";
+
+            const androidIntent = `intent:#Intent;` +
+                `action=android.intent.action.INSERT;` +
+                `type=vnd.android.cursor.dir/contact;` +
+                `S.name=${encodeURIComponent(name)};` +
+                `S.phone=${encodeURIComponent(phone)};` +
+                `S.secondary_phone=${encodeURIComponent(workPhone)};` +
+                `S.company=${encodeURIComponent(company)};` +
+                `S.job_title=${encodeURIComponent(jobTitle)};` +
+                `S.postal=${encodeURIComponent(address)};` +
+                `end`;
+
+            window.location.href = androidIntent;
+
+        } else {
+            // Fallback doar pentru laptop/desktop: descarcă fișierul vcf
+            window.location.href = 'stefan.vcf';
+        }
+    }
+</script>
 </body>
 </html>
