@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+N;CHARSET=UTF-8:Mândrescu;Ștefan;;;
+FN;CHARSET=UTF-8:Ștefan Mândrescu
+ORG;CHARSET=UTF-8:Lokmera Ltd.
+TITLE;CHARSET=UTF-8:Sales & Support Engineer
+TEL;TYPE=CELL,VOICE:+37369005858
+TEL;TYPE=WORK,VOICE:+37322288822
+ADR;TYPE=WORK;CHARSET=UTF-8:;;str. Mitropolit Gurie Grosu 9;Chișinău;;MD-2028;Moldova
+URL:https://lokmera.md
+END:VCARD
