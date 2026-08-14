@@ -5,18 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ștefan Mândrescu — Lokmera Ltd.</title>
     
+    <!-- Google Fonts for American Psycho elegance & modern readability -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-color: #f7f5f0;
-            --card-bg: #ffffff;
-            --text-primary: #111827;
-            --text-secondary: #4b5563;
-            --brand-accent: #004B87;
-            --border-color: #e5e0d8;
+            --bg-color: #f7f5f0;           /* Bone / Off-White */
+            --card-bg: #ffffff;            /* Pure Crisp Card */
+            --text-primary: #111827;       /* Deep Charcoal */
+            --text-secondary: #4b5563;     /* Muted Grey */
+            --brand-accent: #004B87;       /* Lokmera Navy Blue */
+            --border-color: #e5e0d8;       /* Subtle Embossed Border */
             --shadow-subtle: 0 20px 40px -15px rgba(0, 0, 0, 0.07);
         }
 
@@ -36,6 +37,7 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
+            /* Subtle tactile grain */
             background-image: radial-gradient(#e2ded4 0.75px, transparent 0.75px);
             background-size: 16px 16px;
         }
@@ -51,6 +53,7 @@
             position: relative;
         }
 
+        /* Company Header */
         .company-header {
             display: flex;
             justify-content: space-between;
@@ -77,6 +80,7 @@
             font-weight: 600;
         }
 
+        /* Personal Info Block */
         .person-info {
             margin-bottom: 32px;
         }
@@ -99,61 +103,46 @@
             font-weight: 600;
         }
 
-        .actions {
+        /* Highlighted Main Phone Call to Action */
+        .mobile-highlight {
+            background-color: #faf9f6;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-bottom: 28px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-bottom: 32px;
-        }
-
-        .btn-primary {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background-color: var(--brand-accent);
-            color: #ffffff;
+            gap: 4px;
             text-decoration: none;
-            padding: 14px 20px;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            letter-spacing: 0.03em;
-            transition: background-color 0.2s ease, transform 0.1s ease;
-            cursor: pointer;
-            border: none;
-            width: 100%;
-        }
-
-        .btn-primary:active {
-            transform: scale(0.99);
-        }
-
-        .btn-secondary {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background-color: transparent;
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-            text-decoration: none;
-            padding: 12px 20px;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: 500;
             transition: border-color 0.2s ease, background-color 0.2s ease;
         }
 
-        .btn-secondary:hover {
-            background-color: #faf9f6;
-            border-color: #c8c2b7;
+        .mobile-highlight:hover {
+            border-color: var(--brand-accent);
+            background-color: #ffffff;
         }
 
+        .mobile-label {
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .mobile-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            color: var(--brand-accent);
+        }
+
+        /* Details List */
         .details-list {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 18px;
             border-top: 1px solid var(--border-color);
             padding-top: 24px;
             font-size: 0.85rem;
@@ -184,6 +173,7 @@
             color: var(--brand-accent);
         }
 
+        /* Footer / Watermark */
         .card-footer {
             margin-top: 32px;
             text-align: center;
@@ -193,38 +183,30 @@
             color: #a39d93;
             text-transform: uppercase;
         }
-
-        .icon {
-            width: 16px;
-            height: 16px;
-            fill: currentColor;
-        }
     </style>
 </head>
 <body>
 
     <div class="card-container">
+        <!-- Header -->
         <div class="company-header">
             <div class="company-name">Lokmera</div>
             <div class="company-tag">Moldova</div>
         </div>
 
+        <!-- Main Identity -->
         <div class="person-info">
             <h1 class="name">Ștefan Mândrescu</h1>
             <div class="title">Sales & Support Engineer</div>
         </div>
 
-        <div class="actions">
-            <!-- Buton cu legătură directă către schema vCard -->
-            <a href="#" class="btn-primary" onclick="handleContactAdd(event)">
-                Adaugă în Contacte
-            </a>
-            <a href="tel:+37369005858" class="btn-secondary">
-                <svg class="icon" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-                Apelează Mobil
-            </a>
-        </div>
+        <!-- Prominent Mobile Number -->
+        <a href="tel:+37369005858" class="mobile-highlight">
+            <span class="mobile-label">Mobil / WhatsApp</span>
+            <span class="mobile-number">+373 69 005 858</span>
+        </a>
 
+        <!-- Detailed Contact Info -->
         <div class="details-list">
             <div class="detail-item">
                 <span class="detail-label">Telefon Birou</span>
@@ -232,7 +214,7 @@
             </div>
 
             <div class="detail-item">
-                <span class="detail-label">Web</span>
+                <span class="detail-label">Website</span>
                 <a href="https://lokmera.md" target="_blank" rel="noopener" class="detail-value">www.lokmera.md</a>
             </div>
 
@@ -246,60 +228,9 @@
         </div>
 
         <div class="card-footer">
-            Bone &bull; Silian Rail Style
+            Lokmera Ltd. &bull; Bone & Silian Rail Style
         </div>
     </div>
 
-<script>
-    async function handleContactAdd(event) {
-        if (event) event.preventDefault();
-
-        const vcardData = `BEGIN:VCARD
-VERSION:3.0
-N;CHARSET=UTF-8:Mândrescu;Ștefan;;;
-FN;CHARSET=UTF-8:Ștefan Mândrescu
-ORG;CHARSET=UTF-8:Lokmera Ltd.
-TITLE;CHARSET=UTF-8:Sales & Support Engineer
-TEL;TYPE=CELL,VOICE:+37369005858
-TEL;TYPE=WORK,VOICE:+37322288822
-ADR;TYPE=WORK;CHARSET=UTF-8:;;str. Mitropolit Gurie Grosu 9;Chișinău;;MD-2028;Moldova
-URL:https://lokmera.md
-END:VCARD`;
-
-        const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-        // 1. PE IPHONE (iOS): Deschide direct ecranul nativ Apple Contacts
-        if (isIOS) {
-            window.location.href = 'data:text/vcard;charset=utf-8,' + encodeURIComponent(vcardData);
-            return;
-        }
-
-        // 2. PE ANDROID (Browsere Moderne): Deschide fia de partajare nativă cu opțiunea "Salvează în Contacte"
-        const file = new File([vcardData], 'Stefan_Mandrescu_Lokmera.vcf', { type: 'text/vcard' });
-
-        if (navigator.canShare && navigator.canShare({ files: [file] })) {
-            try {
-                await navigator.share({
-                    files: [file],
-                    title: 'Ștefan Mândrescu',
-                    text: 'Contact Ștefan Mândrescu - Lokmera Ltd.'
-                });
-                return;
-            } catch (err) {
-                // Dacă utilizatorul închide fereastra de share, nu facem nimic
-                if (err.name === 'AbortError') return;
-            }
-        }
-
-        // 3. FALLBACK PENTRU DESKTOP / BROWSERE VECHI: Descarcă fișierul .vcf
-        const blob = new Blob([vcardData], { type: 'text/vcard;charset=utf-8' });
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.setAttribute('download', 'Stefan_Mandrescu_Lokmera.vcf');
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }
-</script>
 </body>
 </html>
